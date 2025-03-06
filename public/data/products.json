@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "elixSr Black Knitted Sweater",
+        "price": 50,
+        "img": "/img/elixSr Black Knitted Sweater.png"
+    },
+    {
+        "id": 2,
+        "name": "elixSr Spider Belt",
+        "price": 20,
+        "img": "/img/elixSr Spider Belt.png"
+    },
+    {
+        "id": 3,
+        "name": "elixSr White Knitted Sweater",
+        "price": 50,
+        "img": "/img/elixSr White Knitted Sweater.png"
+    },
+    {
+        "id": 4,
+        "name": "£LIX TRIBAL JORTS",
+        "price": 60,
+        "img": "/img/ELIX TRIBAL JORTS.png"
+    },
+    {
+        "id": 5,
+        "name": "elixSr Reversible Tribal Beanie",
+        "price": 25,
+        "img": "/img/elixSr Reversible Tribal Beanie.png"
+    },
+    {
+        "id": 6,
+        "name": "elixSr Hokey Jersey",
+        "price": 55,
+        "img": "/img/elixSr Hokey Jersey.png"
+    }
+]
