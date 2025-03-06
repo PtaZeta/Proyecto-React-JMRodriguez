@@ -464,7 +464,7 @@ h2 {
 footer {
     position: relative;
     width: 100%;
-    margin-top: 50px;
+    margin-top: 80px;
 }
 
 footer div {
@@ -482,21 +482,15 @@ footer img {
     max-height: 32px;
 }
 
-.product-image {
+.producto-image {
     max-width: 100%;
     height: auto;
 }
 
-.product-name {
+.producto-name {
     font-size: 18px;
     font-weight: bold;
-    margin: 10px 0;
-}
-
-.product-price {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 10px;
+    margin-bottom: 27px;
 }
 
 .button-container {
@@ -521,11 +515,58 @@ footer img {
     background: rgba(255, 255, 255, 0.2);
 }
 
-.product-card {
+.producto-card {
     background-color: rgba(0, 0, 0, 0.6);
     padding: 16px;
     border-radius: 8px;
     text-align: center;
     color: white;
     margin-top: 15px;
+}
+
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.cart-overlay .close-cart {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.cart-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+.cart-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.cart-button.increase {
+    background-color: green;
+}
+
+.cart-button.decrease {
+    background-color: red;
 }

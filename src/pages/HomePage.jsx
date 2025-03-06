@@ -1,54 +1,80 @@
 import { useState, useEffect } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Cart from "../components/Cart";
-import Button from "../components/Button";
+import { Link } from "react-router-dom";
+import Encabezado from "../components/Header";
+import PieDePagina from "../components/Footer";
+import Carrito from "../components/Cart";
+import Boton from "../components/Button";
 
-export default function HomePage() {
-    const [cart, setCart] = useState([]);
-    const [products, setProducts] = useState([]);
+export default function PaginaPrincipal() {
+    const [carrito, setCarrito] = useState([]);
+    const [productos, setProductos] = useState([]);
+    const [esCarritoVisible, setEsCarritoVisible] = useState(false);
 
     useEffect(() => {
-        fetch("/data/products.json")
-            .then((response) => response.json())
-            .then((data) => setProducts(data))
-            .catch((error) => console.error("Error al cargar productos:", error));
+        const fetchProductos = async () => {
+            try {
+                const response = await fetch("/data/products.json");
+                if (!response.ok) {
+                    throw new Error("Error al cargar productos");
+                }
+                const data = await response.json();
+                setProductos(data);
+            } catch (error) {
+                console.error("Error al cargar productos:", error);
+            }
+        };
+
+        fetchProductos();
     }, []);
 
-    const addToCart = (product) => {
-        setCart((prevCart) => {
-            const existingItem = prevCart.find((item) => item.id === product.id);
-            if (existingItem) {
-                return prevCart.map((item) =>
-                    item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+    const agregarAlCarrito = (producto) => {
+        setCarrito((carritoPrevio) => {
+            const itemExistente = carritoPrevio.find((item) => item.id === producto.id);
+            if (itemExistente) {
+                return carritoPrevio.map((item) =>
+                    item.id === producto.id ? { ...item, cantidad: item.cantidad + 1 } : item
                 );
             } else {
-                return [...prevCart, { ...product, quantity: 1 }];
+                return [...carritoPrevio, { ...producto, cantidad: 1 }];
             }
         });
     };
 
-    const removeFromCart = (id) => {
-        setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+    const eliminarDelCarrito = (producto) => {
+        setCarrito((carritoPrevio) => {
+            return carritoPrevio.map((item) =>
+                item.id === producto.id ? { ...item, cantidad: item.cantidad - 1 } : item
+            ).filter((item) => item.cantidad > 0);
+        });
     };
 
     return (
         <div id="index">
-            <Header />
+            <Encabezado onCarritoClick={() => setEsCarritoVisible(!esCarritoVisible)} />
+
             <main className="mainindex">
                 <section>
-                    {products.map((product) => (
-                        <article key={product.id} className="product-card">
-                            <img src={product.img} alt={product.name} className="product-image" />
-                            <p className="product-name">{product.name}</p>
-                            <p className="product-price">{product.price}€</p>
-                            <Button onClick={() => addToCart(product)}>Agregar al Carrito</Button>
+                    {productos.map((producto, index) => (
+                        <article key={producto.id} className="producto-card">
+                            <Link to={index === 0 ? "/other-page" : "#"}>
+                                <img src={producto.imagen} alt={producto.nombre} className="producto-image" />
+                                <p className="producto-name">{producto.nombre} {producto.precio} €</p>
+                            </Link>
+                            <Boton onClick={() => agregarAlCarrito(producto)}>Agregar al Carrito</Boton>
                         </article>
                     ))}
                 </section>
-                <Cart cartItems={cart} onRemove={removeFromCart} />
+                {esCarritoVisible && (
+                    <Carrito
+                        itemsCarrito={carrito}
+                        onAumentar={agregarAlCarrito}
+                        onDisminuir={eliminarDelCarrito}
+                        onCerrar={() => setEsCarritoVisible(false)}
+                        className="cart-overlay"
+                    />
+                )}
             </main>
-            <Footer />
+            <PieDePagina />
         </div>
     );
 }

@@ -1,24 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-export default function Cart({ cartItems, onRemove }) {
-    const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+export default function Carrito({ itemsCarrito, onAumentar, onDisminuir, onCerrar, className }) {
+    const precioTotal = itemsCarrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
     
     return (
-        <div className="cart">
+        <div className={`cart ${className}`}>
+            <button className="close-cart" onClick={onCerrar}>X</button>
             <h2>Carrito de Compras</h2>
-            {cartItems.length === 0 ? (
+            {itemsCarrito.length === 0 ? (
                 <p>El carrito está vacío</p>
             ) : (
                 <ul>
-                    {cartItems.map((item) => (
+                    {itemsCarrito.map((item) => (
                         <li key={item.id}>
-                            {item.name} - ${item.price} x {item.quantity}
-                            <button onClick={() => onRemove(item.id)}>Eliminar</button>
+                            {item.nombre} - {item.precio} x {item.cantidad} €
+                            <button onClick={() => onAumentar(item)} className="cart-button">+</button>
+                            <button onClick={() => onDisminuir(item)} className="cart-button">-</button>
                         </li>
                     ))}
                 </ul>
             )}
-            <h3>Total: ${totalPrice.toFixed(2)}</h3>
+            <h3>Total: {precioTotal.toFixed(2)} €</h3>
         </div>
     );
 }
