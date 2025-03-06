@@ -13,7 +13,7 @@ export default function PaginaPrincipal() {
     useEffect(() => {
         const fetchProductos = async () => {
             try {
-                const response = await fetch("/data/products.json");
+                const response = await fetch("/products.json");
                 if (!response.ok) {
                     throw new Error("Error al cargar productos");
                 }
