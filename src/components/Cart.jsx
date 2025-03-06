@@ -13,7 +13,7 @@ export default function Carrito({ itemsCarrito, onAumentar, onDisminuir, onCerra
                 <ul>
                     {itemsCarrito.map((item) => (
                         <li key={item.id}>
-                            {item.nombre} - {item.precio} x {item.cantidad} €
+                            {item.nombre} - {item.precio} € x {item.cantidad} 
                             <button onClick={() => onAumentar(item)} className="cart-button">+</button>
                             <button onClick={() => onDisminuir(item)} className="cart-button">-</button>
                         </li>
