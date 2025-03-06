@@ -54,9 +54,9 @@ export default function PaginaPrincipal() {
 
             <main className="mainindex">
                 <section>
-                    {productos.map((producto, index) => (
+                    {productos.map((producto) => (
                         <article key={producto.id} className="producto-card">
-                            <Link to={index === 0 ? "/other-page" : "#"}>
+                            <Link to={"/other-page"}>
                                 <img src={producto.imagen} alt={producto.nombre} className="producto-image" />
                                 <p className="producto-name">{producto.nombre} {producto.precio} €</p>
                             </Link>
