@@ -1,7 +1,9 @@
-export default function Boton({ onClick, children }) {
+export default function Boton({ onClick, nombre }) {
     return (
         <button onClick={onClick} className="custom-button">
-            {children}
+            {nombre}
         </button>
     );
 }
+
+
